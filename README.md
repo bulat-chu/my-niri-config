@@ -7,6 +7,10 @@ Packages:
 niri
 xwayland-satellite
 waybar
+awww
+xdg-desktop-portal-gnome
+alacritty
+qt6-multimedia-ffmpeg
 kate
 meowdo
 mpd
