@@ -21,6 +21,7 @@ wireplumber
 pipewire-pulse
 mpv
 brightnessctl
+sunsetr
 ddcutil
 htop
 qt5-wayland
@@ -34,6 +35,7 @@ gvfs
 jmtpfs
 udiskie
 bluez
+bluez-utils
 bluetui
 batsignal
 man
