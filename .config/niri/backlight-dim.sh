@@ -1,7 +1,7 @@
 #!/bin/sh
 # usage: backlight-dim.sh <target_percent|restore> <device>
 device="$2"
-STATE_FILE="/tmp/brightness-before-dim-${device//[:\/]/_}"
+STATE_FILE="$HOME/.config/niri/scripts/tempfiles/brightness-before-dim-${device//[:\/]/_}"
 target="$1"
 
 get()  { brightnessctl -d "$device" get; }
