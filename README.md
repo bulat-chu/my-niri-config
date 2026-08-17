@@ -11,6 +11,8 @@ awww
 xdg-desktop-portal-gnome
 alacritty
 qt6-multimedia-ffmpeg
+hyprlock
+hypridle
 kate
 meowdo
 mpd
