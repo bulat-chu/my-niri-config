@@ -266,20 +266,21 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-//$wallpaper_manager "waypaper --restore"		// custom
-//$shell-or-bar "waybar"						// custom
-//$polkit = 							// custom
-//$idle-manager = 						// custom
-
+// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
+// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"					// custom
+spawn-sh-at-startup "hypridle -c $HOME/.config/niri/hypridle.conf"		// custom
 spawn-at-startup "waybar"			// custom
 spawn-sh-at-startup "waypaper --restore"	// custom
 spawn-at-startup "udiskie"					// custom
 spawn-sh-at-startup "fcitx5 -d"				// custom
 spawn-sh-at-startup "mako"					// custom
-spawn-sh-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &"					// custom
-//spawn-at-startup "$polkit"				// custom
-//spawn-at-startup "$idle-manager"		// custom
+
+spawn-at-startup "swayidle" "-w" \
+"timeout" "300" "swaylock -f" \
+"timeout" "600" "niri msg action power-off-monitors" \
+"before-sleep" "swaylock -f"
+
 
 // Environment variables //All custom
 environment {
@@ -290,11 +291,6 @@ environment {
     QT_QPA_PLATFORM "xcb"
 //    ANKI_WAYLAND "1"
 }
-
-spawn-sh-at-startup "waypaper --restore" // custom
-
-// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -344,6 +340,41 @@ window-rule {
 	match app-id=r#"firefox$"#
 	open-maximized true
 }
+
+window-rule {
+    match app-id=r#"Alacritty$"#
+    open-maximized true
+
+    background-effect {
+        blur true
+    }
+}
+
+// Enable blur behind the launcher.
+layer-rule {
+    match namespace="^wofi$"
+    geometry-corner-radius 10
+
+    background-effect {
+        xray false
+        blur true
+    }
+}
+
+// Blur the background behind Waybar popup menus.
+layer-rule {
+    match namespace="^waybar$"
+
+    popups {
+        // Match the default GTK 3 popup corner radius.
+        geometry-corner-radius 10
+
+        background-effect {
+            blur true
+        }
+    }
+}
+
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
