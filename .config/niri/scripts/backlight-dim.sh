@@ -29,5 +29,5 @@ step_delta=$(( (target_pct - current_pct) / steps ))
 
 for i in $(seq 1 $steps); do
     set_pct "$((current_pct + step_delta * i))"
-    sleep 0.03
+    sleep 0.05
 done
