@@ -8,17 +8,13 @@
 
 "modules-left": ["clock","idle_inhibitor","custom/blue_light_filter","backlight","custom/backlight_external", "custom/meowdo","network","bluetooth","mpd","tray"],
 "modules-center": ["niri/workspaces"],
-"modules-right":  ["pulseaudio#microphone","pulseaudio","cpu","memory","custom/battery_BAT0_not_existing","battery#bat0","custom/powermenu"],
-// "modules-right":  ["pulseaudio#microphone","pulseaudio","cpu","memory","custom/battery_BAT0_not_existing","battery#bat0","custom/battery_BAT1_not_existing","battery#bat1","custom/powermenu"],
+"modules-right":  ["pulseaudio#microphone","pulseaudio","cpu","memory","custom/battery_BAT1_not_existing","battery#bat1","custom/powermenu"],
 
 // ---------------------------------------------------------------------------------------------------------
 
 "niri/workspaces": {
   "format": "{}",
 },
-
-// ---------------------------------------------------------------------------------------------------------
-
 
 // ---------------------------------------------------------------------------------------------------------
 
@@ -30,23 +26,22 @@
 
 // ---------------------------------------------------------------------------------------------------------
 
-"custom/battery_BAT0_not_existing": {
+"custom/battery_BAT1_not_existing": {
   "interval": 20,
   "max-length": 7,
   "min-length": 7,
   "align": 0,
-  "exec": "if ! test -d /sys/class/power_supply/BAT0; then echo 1; fi",
+  "exec": "if ! test -d /sys/class/power_supply/BAT1; then echo 1; fi",
   "return-type": "text",
   "format": "{icon}",
   "format-icons": "󱟩 BAT0",
   "tooltip": false
 },
 
-
 // ---------------------------------------------------------------------------------------------------------
 
-"battery#bat0": {
-  "bat": "BAT0",
+"battery#bat1": {
+  "bat": "BAT1",
   "interval": 10,
   "max-length": 7,
   "min-length": 7,
@@ -57,38 +52,6 @@
   "format-charging": " {capacity}%",
   "format-plugged": " {capacity}%",
   },
-
-
-// ---------------------------------------------------------------------------------------------------------
-
-// "custom/battery_BAT1_not_existing": {
-//  "interval": 20,
-//  "max-length": 6,
-//  "min-length": 6,
-//  "align": 0,
-//  "exec": "if ! test -d /sys/class/power_supply/BAT1; then echo 1; fi",
-//  "return-type": "text",
-//  "format": "{icon}",
-//  "format-icons": "󱟩 BAT1",
-//  "tooltip": false
-// },
-
-
-// ---------------------------------------------------------------------------------------------------------
-
-// "battery#bat1": {
-//  "bat": "BAT1",
-//  "interval": 10,
-//  "max-length": 6,
-//  "min-length": 6,
-//  "align": 0,
-//  "tooltip": false,
-//  "format": "{icon} {capacity}%",
-//  "format-icons": ["󱉞", "󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-//  "format-charging": " {capacity}%",
-//  "format-plugged": " {capacity}%",
-// },
-
 
 // ---------------------------------------------------------------------------------------------------------
 
@@ -137,7 +100,7 @@
     "interval": 1,
 	"format": "{icon}  {usage}%",
 	"format-icons": [
-     	"<span color='#33ccff'>󰄰</span>", 
+     	"<span color='#33ccff'>󰄰</span>",
         "<span color='#00d4ff'>󰪞</span>",
         "<span color='#00dcf9'>󰪟</span>",
         "<span color='#00e2ef'>󰪠</span>",
@@ -172,11 +135,10 @@
         "<span color='#00fbb0'>󰪤</span>",
         "<span color='#00ff99'>󰪥</span>"
 	],
-		
+
     "align": 0,
     "tooltip": true,
-    "tooltip-format": "Memory: {used:0.1f}G/{total:0.1f}G
-SWAP:   {swapUsed:0.1f}G/{swapTotal:0.1f}G",
+    "tooltip-format": "Memory: {used:0.1f}G/{total:0.1f}G\nSWAP:   {swapUsed:0.1f}G/{swapTotal:0.1f}G",
     "warning": 85,
     "critical": 95
 },
@@ -191,23 +153,15 @@ SWAP:   {swapUsed:0.1f}G/{swapTotal:0.1f}G",
   "align"     : 0,
 
   "format-wifi"         : "{icon}",
-  "format-icons"        : ["󰤯","󰤟","󰤢","󰤥","󰤨"], 
+  "format-icons"        : ["󰤯","󰤟","󰤢","󰤥","󰤨"],
   "format-ethernet"     : "󰱔",  //Ethernet available
-  "format-linked"       : "󰲊",  //Link Up  
+  "format-linked"       : "󰲊",  //Link Up
   "format-disconnected"	: "󰱟",  //Disconnected
   "format-disabled"	    : "󰲜",  //Admin Down
-  
+
   "tooltip"                     : true,
-  "tooltip-format-ethernet"	:"IP:    {ipaddr}/{cidr}
-󰧝 {bandwidthUpBits}
-󰧗 {bandwidthDownBits}",
-  "tooltip-format-wifi":
-"Signal:{signalStrength}% ({signaldBm}dBm) \n
-IP:    {ipaddr}/{cidr}
-ESSID: {essid}
-Frequency: {frequency} GHz
-󰧝 {bandwidthUpBits}
-󰧗 {bandwidthDownBits}",
+  "tooltip-format-ethernet":"IP:    {ipaddr}/{cidr}\n󰧝 {bandwidthUpBits}\n󰧗 {bandwidthDownBits}",
+  "tooltip-format-wifi":"Signal:{signalStrength}% ({signaldBm}dBm)\nIP:    {ipaddr}/{cidr}\nESSID: {essid}\nFrequency: {frequency} GHz\n󰧝 {bandwidthUpBits}\n󰧗 {bandwidthDownBits}",
   "on-click-right": "exec alacritty -e nmtui"
 },
 
@@ -323,13 +277,7 @@ Frequency: {frequency} GHz
   "align": 0,
   "on-click": "playerctl --all-players play-pause",
     "tooltip": true,
-    "tooltip-format": "Status - {status_icon}
-Player - {player}
-
-Length - {length}
-Artist - {artist}
-Album  - {album}
-Title  - {title}",
+    "tooltip-format": "Status - {status_icon}\nPlayer - {player}\n\n\nLength - {length}\nArtist - {artist}\nAlbum  - {album}\nTitle  - {title}",
     "format": "{player_icon}",
     "format-paused": "{status_icon}",
     "player-icons": {
@@ -382,17 +330,7 @@ Title  - {title}",
   "title": 50,
   "album-len": 50,
 
-
-
-  "tooltip-format": "State  -  {stateIcon}    {randomIcon}    {repeatIcon}{singleIcon}
-
-Time   - {elapsedTime:%M:%S}
-Length - {totalTime:%M:%S}
-
-Artist - {artist}
-Title  - {title} 
-Album  - {album}",
-
+  "tooltip-format":"State  -  {stateIcon}    {randomIcon}    {repeatIcon}{singleIcon}\n\nTime   - {elapsedTime:%M:%S}\nLength - {totalTime:%M:%S}\n\n\nArtist - {artist}\nTitle  - {title}\nAlbum  - {album}",
   "tooltip-format-disconnected": "MPD (disconnected)",
 },
 
@@ -439,7 +377,7 @@ Album  - {album}",
   "format-icons": " 󰄛",
   "on-click": "alacritty -e 'meowdo'",
 },
-  
+
   // ---------------------------------------------------------------------------------------------------------
 
 "custom/powermenu": {
