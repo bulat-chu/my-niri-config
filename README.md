@@ -60,6 +60,7 @@ fcitx5-configtool
 fcitx5-mozc
 fcitx5-gtk
 fcitx5-qt
+wvkbd
 ```
 ```
 cups
