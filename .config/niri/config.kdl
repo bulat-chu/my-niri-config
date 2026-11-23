@@ -13,14 +13,13 @@ input {
             // For more information, see xkeyboard-config(7).
 
             // For example:
-            // layout "us,ru,jp"
+        	layout "jp, ru"
+            model "jp106"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
 
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
-            layout "jp, ru"
-            model "jp106"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
